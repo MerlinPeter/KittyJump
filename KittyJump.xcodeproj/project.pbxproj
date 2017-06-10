@@ -16,6 +16,17 @@
 		D7C5EAC11EEB5C21007DA71A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAC01EEB5C21007DA71A /* Assets.xcassets */; };
 		D7C5EAC41EEB5C21007DA71A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAC21EEB5C21007DA71A /* LaunchScreen.storyboard */; };
 		D7C5EACF1EEB5C21007DA71A /* KittyJumpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EACE1EEB5C21007DA71A /* KittyJumpTests.swift */; };
+		D7C5EADA1EEB638E007DA71A /* TrainTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EAD91EEB638E007DA71A /* TrainTrack.swift */; };
+		D7C5EADC1EEB76D7007DA71A /* CommonSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EADB1EEB76D7007DA71A /* CommonSpriteNode.swift */; };
+		D7C5EADF1EEB9C67007DA71A /* railroad.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EADE1EEB9C67007DA71A /* railroad.png */; };
+		D7C5EAE11EEBF6E9007DA71A /* grass.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAE01EEBF6E9007DA71A /* grass.png */; };
+		D7C5EAE31EEBFB03007DA71A /* Grass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EAE21EEBFB03007DA71A /* Grass.swift */; };
+		D7C5EAE61EEC07E5007DA71A /* LeftTrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EAE51EEC07E5007DA71A /* LeftTrain.swift */; };
+		D7C5EAE81EEC0881007DA71A /* trainrightfacing.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAE71EEC0881007DA71A /* trainrightfacing.png */; };
+		D7C5EAEA1EEC0993007DA71A /* RightTrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EAE91EEC0993007DA71A /* RightTrain.swift */; };
+		D7C5EAEC1EEC09E1007DA71A /* trainleftfacing.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAEB1EEC09E1007DA71A /* trainleftfacing.png */; };
+		D7C5EAEE1EEC0AC0007DA71A /* Kitty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EAED1EEC0AC0007DA71A /* Kitty.swift */; };
+		D7C5EAF01EEC0AE1007DA71A /* kitty.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAEF1EEC0AE1007DA71A /* kitty.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +53,17 @@
 		D7C5EACA1EEB5C21007DA71A /* KittyJumpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KittyJumpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7C5EACE1EEB5C21007DA71A /* KittyJumpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittyJumpTests.swift; sourceTree = "<group>"; };
 		D7C5EAD01EEB5C21007DA71A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7C5EAD91EEB638E007DA71A /* TrainTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainTrack.swift; sourceTree = "<group>"; };
+		D7C5EADB1EEB76D7007DA71A /* CommonSpriteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSpriteNode.swift; sourceTree = "<group>"; };
+		D7C5EADE1EEB9C67007DA71A /* railroad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = railroad.png; sourceTree = "<group>"; };
+		D7C5EAE01EEBF6E9007DA71A /* grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grass.png; sourceTree = "<group>"; };
+		D7C5EAE21EEBFB03007DA71A /* Grass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grass.swift; sourceTree = "<group>"; };
+		D7C5EAE51EEC07E5007DA71A /* LeftTrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftTrain.swift; sourceTree = "<group>"; };
+		D7C5EAE71EEC0881007DA71A /* trainrightfacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trainrightfacing.png; sourceTree = "<group>"; };
+		D7C5EAE91EEC0993007DA71A /* RightTrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightTrain.swift; sourceTree = "<group>"; };
+		D7C5EAEB1EEC09E1007DA71A /* trainleftfacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trainleftfacing.png; sourceTree = "<group>"; };
+		D7C5EAED1EEC0AC0007DA71A /* Kitty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kitty.swift; sourceTree = "<group>"; };
+		D7C5EAEF1EEC0AE1007DA71A /* kitty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitty.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +105,7 @@
 		D7C5EAB21EEB5C21007DA71A /* KittyJump */ = {
 			isa = PBXGroup;
 			children = (
+				D7C5EADD1EEB9C3A007DA71A /* images */,
 				D7C5EAB31EEB5C21007DA71A /* AppDelegate.swift */,
 				D7C5EAB51EEB5C21007DA71A /* GameScene.sks */,
 				D7C5EAB71EEB5C21007DA71A /* Actions.sks */,
@@ -90,6 +113,7 @@
 				D7C5EABB1EEB5C21007DA71A /* GameViewController.swift */,
 				D7C5EABD1EEB5C21007DA71A /* Main.storyboard */,
 				D7C5EAC01EEB5C21007DA71A /* Assets.xcassets */,
+				D7C5EAE41EEC058C007DA71A /* Sprites */,
 				D7C5EAC21EEB5C21007DA71A /* LaunchScreen.storyboard */,
 				D7C5EAC51EEB5C21007DA71A /* Info.plist */,
 			);
@@ -103,6 +127,31 @@
 				D7C5EAD01EEB5C21007DA71A /* Info.plist */,
 			);
 			path = KittyJumpTests;
+			sourceTree = "<group>";
+		};
+		D7C5EADD1EEB9C3A007DA71A /* images */ = {
+			isa = PBXGroup;
+			children = (
+				D7C5EADE1EEB9C67007DA71A /* railroad.png */,
+				D7C5EAE01EEBF6E9007DA71A /* grass.png */,
+				D7C5EAE71EEC0881007DA71A /* trainrightfacing.png */,
+				D7C5EAEB1EEC09E1007DA71A /* trainleftfacing.png */,
+				D7C5EAEF1EEC0AE1007DA71A /* kitty.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		D7C5EAE41EEC058C007DA71A /* Sprites */ = {
+			isa = PBXGroup;
+			children = (
+				D7C5EADB1EEB76D7007DA71A /* CommonSpriteNode.swift */,
+				D7C5EAE21EEBFB03007DA71A /* Grass.swift */,
+				D7C5EAD91EEB638E007DA71A /* TrainTrack.swift */,
+				D7C5EAE51EEC07E5007DA71A /* LeftTrain.swift */,
+				D7C5EAE91EEC0993007DA71A /* RightTrain.swift */,
+				D7C5EAED1EEC0AC0007DA71A /* Kitty.swift */,
+			);
+			name = Sprites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,9 +239,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7C5EAE11EEBF6E9007DA71A /* grass.png in Resources */,
+				D7C5EAEC1EEC09E1007DA71A /* trainleftfacing.png in Resources */,
 				D7C5EABF1EEB5C21007DA71A /* Main.storyboard in Resources */,
+				D7C5EAF01EEC0AE1007DA71A /* kitty.png in Resources */,
 				D7C5EAB61EEB5C21007DA71A /* GameScene.sks in Resources */,
+				D7C5EAE81EEC0881007DA71A /* trainrightfacing.png in Resources */,
 				D7C5EAC11EEB5C21007DA71A /* Assets.xcassets in Resources */,
+				D7C5EADF1EEB9C67007DA71A /* railroad.png in Resources */,
 				D7C5EAC41EEB5C21007DA71A /* LaunchScreen.storyboard in Resources */,
 				D7C5EAB81EEB5C21007DA71A /* Actions.sks in Resources */,
 			);
@@ -212,9 +266,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7C5EADC1EEB76D7007DA71A /* CommonSpriteNode.swift in Sources */,
 				D7C5EABA1EEB5C21007DA71A /* GameScene.swift in Sources */,
+				D7C5EAE31EEBFB03007DA71A /* Grass.swift in Sources */,
+				D7C5EAE61EEC07E5007DA71A /* LeftTrain.swift in Sources */,
 				D7C5EABC1EEB5C21007DA71A /* GameViewController.swift in Sources */,
+				D7C5EADA1EEB638E007DA71A /* TrainTrack.swift in Sources */,
 				D7C5EAB41EEB5C21007DA71A /* AppDelegate.swift in Sources */,
+				D7C5EAEE1EEC0AC0007DA71A /* Kitty.swift in Sources */,
+				D7C5EAEA1EEC0993007DA71A /* RightTrain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
