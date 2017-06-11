@@ -39,7 +39,9 @@ class RightTrain : CommonSpriteNode{
         physicsBody!.allowsRotation = false
         physicsBody!.linearDamping = 0.5
         physicsBody!.categoryBitMask = category_train
-        physicsBody!.contactTestBitMask = category_kitty
+        physicsBody!.contactTestBitMask = category_kitty | category_track
+        physicsBody!.collisionBitMask = category_kitty | category_track
+
         physicsBody!.usesPreciseCollisionDetection = true
         physicsBody!.isDynamic = false
 

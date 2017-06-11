@@ -32,7 +32,17 @@ class TrainTrack : CommonSpriteNode{
             anchorPoint.x = 0
             anchorPoint.y = 0
             zPosition = -1
+           /* let centerPoint = CGPoint(x: self.size.width / 2 - (self.size.width * self.anchorPoint.x),y: self.size.height / 2 - (self.size.height * self.anchorPoint.y))
 
+            physicsBody=SKPhysicsBody(rectangleOf:CGSize(width: 750*3, height: 20), center :centerPoint)
+            
+            physicsBody!.allowsRotation = false
+             physicsBody!.linearDamping = 0.5
+            physicsBody!.categoryBitMask = category_track
+            physicsBody!.contactTestBitMask = category_train
+            physicsBody!.collisionBitMask = category_train
+            physicsBody!.usesPreciseCollisionDetection = true
+            physicsBody!.isDynamic = false*/
         }
     
     }

@@ -40,7 +40,9 @@ class Kitty : CommonSpriteNode{
         physicsBody!.linearDamping = 0.5
         physicsBody!.categoryBitMask = category_kitty
         physicsBody!.contactTestBitMask = category_train
+        physicsBody!.collisionBitMask = category_train 
         physicsBody!.usesPreciseCollisionDetection = true
+ 
         physicsBody!.isDynamic = true
 
     }

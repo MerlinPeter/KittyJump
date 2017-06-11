@@ -30,10 +30,12 @@ class GameScene: SKScene {
     let grass4 = Grass()
     let grass5 = Grass()
     
-    let leftTrain1 = LeftTrain()
-    let leftTrain2 = LeftTrain()
+    let leftTrain1 =  LeftTrain()
+    let leftTrain2 =  LeftTrain()
     let rightTrain1 = RightTrain()
     let rightTrain2 = RightTrain()
+    let rightTrain3 = RightTrain()
+    
     
     
     let kitty = Kitty()
@@ -54,11 +56,14 @@ class GameScene: SKScene {
         rightTrainSetup()
         
         kitty.position = CGPoint(x: -rightTrain1.size.width + (kitty.size.width/1.25) , y: rightTrain1.position.y + (rightTrain1.size.height / 2) )
-        self.addChild(kitty)
+        
+        //kitty.position = CGPoint(x: -275 , y: 100 )
+        
+       //  self.addChild(kitty)
         
         let myJoint = SKPhysicsJointPin.joint(withBodyA: rightTrain1.physicsBody! , bodyB: kitty.physicsBody!, anchor: CGPoint(x: self.rightTrain1.frame.minX, y: self.rightTrain1.frame.minY))
         
-        self.physicsWorld.add(myJoint)
+     //   self.physicsWorld.add(myJoint)
         
     }
     // MARK: Init  functions to build screen
@@ -110,20 +115,28 @@ class GameScene: SKScene {
     
     
     func leftTrainSetup()  {
+        
         //second train from  down
-       leftTrain1.position = CGPoint(x: 375 - (leftTrain1.size.width/2), y:trainTrack2.position.y  + trainTrack2.size.height + leftTrain1.size.height/2)
-       self.addChild(leftTrain1)
-        // TODO: merlin fix add one more train in second row  from the top
-
+        leftTrain1.position = CGPoint(x: 375 - (leftTrain1.size.width/2), y:trainTrack2.position.y  + trainTrack2.size.height + leftTrain1.size.height/2)
+        self.addChild(leftTrain1)
+        leftTrain2.position = CGPoint(x: 375 - (leftTrain2.size.width/2), y:trainTrack4.position.y  + trainTrack4.size.height + leftTrain2.size.height/2)
+        // fourth train from down
+        self.addChild(leftTrain2)
         
     }
     
     func rightTrainSetup()  {
+        
         //last train
         rightTrain1.position = CGPoint(x: -275 , y:trainTrack1.position.y  + trainTrack1.size.height + rightTrain1.size.height/2)
         self.addChild(rightTrain1)
-        // TODO: merlin fix add two more trains first row and third row
-
+        //third train
+        rightTrain2.position = CGPoint(x: -275 , y:trainTrack3.position.y  + trainTrack3.size.height + rightTrain2.size.height/2)
+        self.addChild(rightTrain2)
+        //5th from down
+        rightTrain3.position = CGPoint(x: -275 , y:trainTrack5.position.y  + trainTrack5.size.height + rightTrain3.size.height/2)
+        self.addChild(rightTrain3)
+        
         
     }
 
@@ -140,35 +153,59 @@ class GameScene: SKScene {
 
     override func didMove(to view: SKView) {
         
-       //code to move the train
+        //code to move the train
         
-      moveRightTrain(irTrain: rightTrain1)
-       moveLeftTrain(ilTrain: leftTrain1)
+            moveRightTrain(irTrain: rightTrain1, itrack:trainTrack1 )
+            moveLeftTrain(ilTrain: leftTrain1)
         // TODO: merlin make remaining trains to move
+            moveRightTrain(irTrain: rightTrain2 , itrack:trainTrack3)
+        //  moveLeftTrain(ilTrain: leftTrain2)
+            moveRightTrain(irTrain: rightTrain3, itrack:trainTrack5)
         
-
-        
-         
+ 
     }
 
-    func moveRightTrain(irTrain:RightTrain)  {
+    func moveRightTrain(irTrain:RightTrain, itrack:TrainTrack)  {
         
+        let yPostionC :CGFloat = itrack.position.y  + itrack.size.height + irTrain.size.height/2
         let path = CGMutablePath()
-        path.move(to: CGPoint(x: -275  , y: 0))
-         path.addLine(to: CGPoint(x: self.frame.size.width + irTrain.size.width, y: 0))
-        let followLine = SKAction.follow(path, asOffset: true, orientToPath: false, duration: 15.0)
-        let reversedLine = followLine.reversed()
-        irTrain.run(SKAction.sequence([followLine,reversedLine]))
-    }
+        
+        path.move(to: CGPoint(x: -375 - irTrain.size.width/2 , y: yPostionC))
+        path.addLine(to: CGPoint(x: self.frame.size.width , y: yPostionC))
+        let followLine = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 10.0)
+        irTrain.run(followLine )
+        
+        irTrain.run(
+            SKAction.repeatForever(
+                SKAction.sequence([followLine,
+                                   SKAction.wait(forDuration: 3),
+                                   followLine,
+                                   SKAction.wait(forDuration: 3)
+                    ])
+            )
+            
+        )
+        
+   }
     
     func moveLeftTrain(ilTrain:LeftTrain)  {
-        
+        // TODO: merlin fix this function similar to right train move
+
         let path = CGMutablePath()
         path.move(to: CGPoint(x: 375  , y: 0))
         path.addLine(to: CGPoint(x: -self.frame.size.width - ilTrain.size.width , y: 0))
-        let followLine = SKAction.follow(path, asOffset: true, orientToPath: false, duration: 15.0)
-        let reversedLine = followLine.reversed()
-        ilTrain.run(SKAction.sequence([followLine,reversedLine]))
+        let followLine = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 15.0)
+        // let reversedLine = followLine.reversed()
+        ilTrain.run(followLine )
+
+       /* ilTrain.run(
+            SKAction.repeatForever(
+                SKAction.sequence([followLine,
+                                   reversedLine,
+                                   SKAction.wait(forDuration: 3)])
+            )
+            
+        )*/
     }
 
 }
