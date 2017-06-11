@@ -14,7 +14,7 @@ class Kitty : CommonSpriteNode{
     init() {
         let texture = SKTexture(imageNamed: "kitty.png")
         // super.init(texture: texture, color: UIColor.clear, size: texture.size())
-        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: 750, height: 105))
+        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: texture.size().width/3, height: texture.size().height/3))
         setup()
         
     }
@@ -30,8 +30,19 @@ class Kitty : CommonSpriteNode{
     func setup(){
         
         //name="Grass"
-        anchorPoint.x = 0
-        anchorPoint.y = 0
+        anchorPoint.x = 0.5
+        anchorPoint.y = 0.5
+        zPosition=1
+        
+        physicsBody=SKPhysicsBody(rectangleOf: self.size)
+
+        physicsBody!.allowsRotation = false
+        physicsBody!.linearDamping = 0.5
+        physicsBody!.categoryBitMask = category_kitty
+        physicsBody!.contactTestBitMask = category_train
+        physicsBody!.usesPreciseCollisionDetection = true
+        physicsBody!.isDynamic = true
+
     }
     
 }

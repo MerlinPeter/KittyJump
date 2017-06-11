@@ -12,7 +12,6 @@ class TrainTrack : CommonSpriteNode{
 
          // MARK: -Init
          init() {
-            
             let texture = SKTexture(imageNamed: "railroad.png")
             super.init(texture: texture, color: UIColor.clear, size: CGSize(width: 750, height: 20))
             setup()
@@ -29,9 +28,11 @@ class TrainTrack : CommonSpriteNode{
         // train setup
         func setup(){
             
-            name="TrainTrack"
+           // name="TrainTrack"
             anchorPoint.x = 0
             anchorPoint.y = 0
+            zPosition = -1
+
         }
     
     }

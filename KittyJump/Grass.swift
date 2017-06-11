@@ -33,6 +33,7 @@ class Grass : CommonSpriteNode{
         name="Grass"
         anchorPoint.x = 0
         anchorPoint.y = 0
+        zPosition = -1
     }
     
 }
