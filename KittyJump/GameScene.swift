@@ -77,35 +77,58 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //track position setup
     func jumpKitty( xPostion:Int)   {
         
-       self.physicsWorld.remove(joint1)
+      // self.physicsWorld.remove(joint1)
 
-        let jump = SKAction.applyImpulse(CGVector(dx: xPostion, dy: 300), duration: 0.3)
-        kitty.run(jump)
+       // let jump = SKAction.applyImpulse(CGVector(dx: xPostion, dy: 300), duration: 0.3)
+       // kitty.run(jump)
 
     }
     /* Called when a touch begins */
+    
+    func switchJoint(iWagon :Wagon )  {
+        self.physicsWorld.remove(joint1)
+        kitty.position = iWagon.position
+        joint1 = SKPhysicsJointPin.joint(withBodyA: iWagon.physicsBody! , bodyB: kitty.physicsBody!, anchor: CGPoint(x: iWagon.frame.midX, y: iWagon.frame.midY))
+        self.physicsWorld.add(joint1)
+    }
 
     override func  touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch: UITouch in touches {
             
             let location = touch.location(in: self)
             let node = self.atPoint(location)
+            let  wagonName = node.name!
+            switch wagonName {
+            case "wagon2":
+                switchJoint(iWagon:wagon2)
+            case "wagon1":
+                switchJoint(iWagon:wagon1)
+            case "wagon3":
+                switchJoint(iWagon:wagon3)
+            case "wagon4":
+                switchJoint(iWagon:wagon4)
+            case "wagon5":
+                switchJoint(iWagon:wagon5)
+            default:
+                break
+                print("wrong call")
+                
+            }
             if (node.name == "move") {
                   
                 let moveAction: SKAction = SKAction.moveBy(x: 10, y: 0, duration: 1)
                 wagon1.run(moveAction)
-            }else{
+            }
+            
+            /*else{
                 if touch.location(in: kitty.parent!).x < kitty.position.x {
                     jumpKitty(xPostion: -25)
                 }else{
                     jumpKitty(xPostion: 25)
-                }
+                }*/
             }
             
-           
-
-        }
-
+  
     }
     
         
@@ -161,22 +184,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func leftTrainSetup()  {
         
         //second train from  down
-        leftTrain1.position = CGPoint(x: -375 + (leftTrain1.size.width/2), y:trainTrack2.position.y  + trainTrack2.size.height + leftTrain1.size.height/2)
+        leftTrain1.position = CGPoint(x: 375 + (leftTrain1.size.width/2), y:trainTrack2.position.y  + trainTrack2.size.height + leftTrain1.size.height/2)
         //self.addChild(leftTrain1)
         
-        wagon2.position = CGPoint(x: 575 - rightTrain1.size.width , y:trainTrack2.position.y  + trainTrack2.size.height)
-        wagon1.name = "wagon2"
+        wagon2.position = CGPoint(x: 375 - wagon2.size.width , y:trainTrack2.position.y  + trainTrack2.size.height)
+        wagon2.name = "wagon2"
 
-       // self.addChild(wagon2)
+        self.addChild(wagon2)
         
         leftTrain2.position = CGPoint(x: 375 + (leftTrain2.size.width/2), y:trainTrack4.position.y  + trainTrack4.size.height + leftTrain2.size.height/2)
         // fourth train from down
         self.addChild(leftTrain2)
         
-        wagon4.position = CGPoint(x: 775 - rightTrain1.size.width , y:trainTrack4.position.y  + trainTrack3.size.height )
-        wagon1.name = "wagon4"
+        wagon4.position = CGPoint(x: 375 - wagon4.size.width , y:trainTrack4.position.y  + trainTrack3.size.height )
+        wagon4.name = "wagon4"
 
-       // self.addChild(wagon4)
+        self.addChild(wagon4)
         
         
     }
@@ -187,7 +210,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightTrain1.position = CGPoint(x: -375 - (rightTrain1.size.width/2), y:trainTrack1.position.y  + trainTrack1.size.height + rightTrain1.size.height/2)
         self.addChild(rightTrain1)
         
-        wagon1.position = CGPoint(x: 375 - rightTrain1.size.width + (wagon1.size.width/2), y:trainTrack1.position.y  + trainTrack1.size.height )
+        wagon1.position = CGPoint(x: -375 - wagon1.size.width + (wagon1.size.width/2), y:trainTrack1.position.y  + trainTrack1.size.height )
         wagon1.name = "wagon1"
         self.addChild(wagon1)
 
@@ -195,77 +218,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightTrain2.position = CGPoint(x: -375 - (rightTrain2.size.width/2), y:trainTrack3.position.y  + trainTrack3.size.height + rightTrain2.size.height/2)
         self.addChild(rightTrain2)
         
-        wagon3.position = CGPoint(x: 675 - rightTrain1.size.width , y:trainTrack3.position.y  + trainTrack3.size.height )
-        wagon1.name = "wagon3"
+        wagon3.position = CGPoint(x: -375 - wagon3.size.width , y:trainTrack3.position.y  + trainTrack3.size.height )
+        wagon3.name = "wagon3"
 
-     //  self.addChild(wagon3)
+       self.addChild(wagon3)
         
         
         //5th from down
         rightTrain3.position = CGPoint(x: -375 - (rightTrain3.size.width/2) , y:trainTrack5.position.y  + trainTrack5.size.height + rightTrain3.size.height/2)
         self.addChild(rightTrain3)
-        wagon5.position = CGPoint(x: 875 - rightTrain1.size.width , y:trainTrack5.position.y  + trainTrack3.size.height )
-        wagon1.name = "wagon5"
+        wagon5.position = CGPoint(x: -375 - wagon5.size.width , y:trainTrack5.position.y  + trainTrack3.size.height )
+        wagon5.name = "wagon5"
 
-       // self.addChild(wagon5)
+        self.addChild(wagon5)
         
     }
 
-    func trainyPostionCal(delta : Int) -> CGFloat {
-        
-        // TODO: merlin fix this function and call this in setup functions
-
-        
-        let calcYpostion = trainYpostion  + trainDiffpostion  + trainTrack1.size.height
-        
-        return calcYpostion
-    }
-    
-    func moveRightTrain(irTrain:Wagon, itrack:TrainTrack)  {
-        
-        let yPostionC :CGFloat = itrack.position.y  + itrack.size.height + irTrain.size.height/2
-        let path = CGMutablePath()
-        
-        path.move(to: CGPoint(x: -375 - irTrain.size.width/2 , y: yPostionC))
-        path.addLine(to: CGPoint(x: self.frame.size.width , y: yPostionC))
-        let followLine = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 10.0)
-        irTrain.run(followLine )
-        
-        irTrain.run(
-            SKAction.repeatForever(
-                SKAction.sequence([followLine,
-                                   SKAction.wait(forDuration: 3),
-                                   followLine,
-                                   SKAction.wait(forDuration: 3)
-                    ])
-            )
-            
-        )
-        
-    }
-    
-    func moveLeftTrain(ilTrain:LeftTrain, itrack:TrainTrack)  {
-        // TODO: merlin fix this function similar to right train move
-        let yPostionC :CGFloat = itrack.position.y  + itrack.size.height + ilTrain.size.height/2
-        let path = CGMutablePath()
-        path.move(to: CGPoint(x: 375 + ilTrain.size.width/2 , y: yPostionC))
-        path.addLine(to: CGPoint(x: -self.frame.size.width , y: yPostionC))
-        let followLine = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 10.0)
-        // let reversedLine = followLine.reversed()
-        ilTrain.run(followLine )
-        
-        ilTrain.run(
-            SKAction.repeatForever(
-                SKAction.sequence([followLine,
-                                   SKAction.wait(forDuration: 3),
-                                   followLine,
-                                   SKAction.wait(forDuration: 3)])
-            )
-            
-        )
-    }
-    
-    
     
     //MARK: - SKScene functions
 
@@ -273,6 +241,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //code to move the train
         moveRightTrain(irTrain: wagon1, itrack:trainTrack1 )
+        moveLeftTrain(ilTrain: wagon2, itrack: trainTrack2)
+        moveRightTrain(irTrain: wagon3, itrack:trainTrack3 )
+        moveLeftTrain(ilTrain: wagon4, itrack: trainTrack4)
+        moveRightTrain(irTrain: wagon5, itrack:trainTrack5 )
+
+      //  moveRightTrain(irTrain: wagon3, itrack:trainTrack3 )
        //moveRightTrain(irTrain: rightTrain1, itrack:trainTrack1 )
        /* moveLeftTrain(ilTrain: leftTrain1,itrack:trainTrack2)
         moveRightTrain(irTrain: rightTrain2 , itrack:trainTrack3)
@@ -304,10 +278,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let  hitWagonPhysics = secondBody.node!.physicsBody!
             let  hitWagon = secondBody.node!
             
-            kitty.position = hitWagon.position
+           /* kitty.position = hitWagon.position
             joint1 = SKPhysicsJointPin.joint(withBodyA: hitWagonPhysics , bodyB: kitty.physicsBody!, anchor: CGPoint(x: hitWagon.frame.midX, y: hitWagon.frame.midY))
             
-            self.physicsWorld.add(joint1)
+            self.physicsWorld.add(joint1)*/
         }
         
         
@@ -334,6 +308,61 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
 
+    
+    
+    func trainyPostionCal(delta : Int) -> CGFloat {
+        
+        // TODO: merlin fix this function and call this in setup functions
+        
+        
+        let calcYpostion = trainYpostion  + trainDiffpostion  + trainTrack1.size.height
+        
+        return calcYpostion
+    }
+    
+    func moveRightTrain(irTrain:Wagon, itrack:TrainTrack)  {
+        
+        let yPostionC :CGFloat = itrack.position.y  + itrack.size.height + irTrain.size.height/2
+        let path = CGMutablePath()
+        
+        path.move(to: CGPoint(x: -375 - irTrain.size.width/2 , y: yPostionC))
+        path.addLine(to: CGPoint(x: self.frame.size.width , y: yPostionC))
+        let followLine = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 10.0)
+        irTrain.run(followLine )
+        
+        irTrain.run(
+            SKAction.repeatForever(
+                SKAction.sequence([followLine,
+                                   SKAction.wait(forDuration: 3),
+                                   followLine,
+                                   SKAction.wait(forDuration: 3)
+                    ])
+            )
+            
+        )
+        
+    }
+    
+    func moveLeftTrain(ilTrain:Wagon, itrack:TrainTrack)  {
+        // TODO: merlin fix this function similar to right train move
+        let yPostionC :CGFloat = itrack.position.y  + itrack.size.height + ilTrain.size.height/2
+        let path = CGMutablePath()
+        path.move(to: CGPoint(x: 375 + ilTrain.size.width/2 , y: yPostionC))
+        path.addLine(to: CGPoint(x: -self.frame.size.width , y: yPostionC))
+        let followLine = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 10.0)
+        // let reversedLine = followLine.reversed()
+        ilTrain.run(followLine )
+        
+        ilTrain.run(
+            SKAction.repeatForever(
+                SKAction.sequence([followLine,
+                                   SKAction.wait(forDuration: 3),
+                                   followLine,
+                                   SKAction.wait(forDuration: 3)])
+            )
+            
+        )
+    }
     
     
     

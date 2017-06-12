@@ -32,7 +32,7 @@ class Wagon : SKSpriteNode{
         alpha = 1
         anchorPoint.y = 0.5
         zPosition = 1
-        
+        name = "wagon"
         physicsBody=SKPhysicsBody(rectangleOf :self.size )
          
          physicsBody!.allowsRotation = false
