@@ -56,6 +56,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
+        
+        let borderBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        borderBody.friction = 0
+        self.physicsBody = borderBody
+        self.physicsBody?.categoryBitMask = category_border
+        
         trackSetup()
         grassSetup()
 
@@ -99,14 +105,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let node = self.atPoint(location)
             let  wagonName = node.name!
             switch wagonName {
-            case "wagon2":
-                switchJoint(iWagon:wagon2)
             case "wagon1":
                 switchJoint(iWagon:wagon1)
+            case "wagon2":
+                switchJoint(iWagon:wagon2)
+                moveRightTrain(irTrain: wagon3, itrack:trainTrack3 )
             case "wagon3":
                 switchJoint(iWagon:wagon3)
+                 moveLeftTrain(ilTrain: wagon4,itrack:trainTrack4)
             case "wagon4":
                 switchJoint(iWagon:wagon4)
+                moveRightTrain(irTrain: wagon5, itrack:trainTrack5 )
             case "wagon5":
                 switchJoint(iWagon:wagon5)
             default:
@@ -210,7 +219,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightTrain1.position = CGPoint(x: -375 - (rightTrain1.size.width/2), y:trainTrack1.position.y  + trainTrack1.size.height + rightTrain1.size.height/2)
         self.addChild(rightTrain1)
         
-        wagon1.position = CGPoint(x: -375 - wagon1.size.width + (wagon1.size.width/2), y:trainTrack1.position.y  + trainTrack1.size.height )
+        wagon1.position = CGPoint(x: self.frame.minX + wagon1.size.width , y:trainTrack1.position.y  + trainTrack1.size.height )
         wagon1.name = "wagon1"
         self.addChild(wagon1)
 
@@ -218,7 +227,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightTrain2.position = CGPoint(x: -375 - (rightTrain2.size.width/2), y:trainTrack3.position.y  + trainTrack3.size.height + rightTrain2.size.height/2)
         self.addChild(rightTrain2)
         
-        wagon3.position = CGPoint(x: -375 - wagon3.size.width , y:trainTrack3.position.y  + trainTrack3.size.height )
+        wagon3.position = CGPoint(x: self.frame.minX + wagon1.size.width , y:trainTrack3.position.y  + trainTrack3.size.height )
         wagon3.name = "wagon3"
 
        self.addChild(wagon3)
@@ -227,7 +236,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //5th from down
         rightTrain3.position = CGPoint(x: -375 - (rightTrain3.size.width/2) , y:trainTrack5.position.y  + trainTrack5.size.height + rightTrain3.size.height/2)
         self.addChild(rightTrain3)
-        wagon5.position = CGPoint(x: -375 - wagon5.size.width , y:trainTrack5.position.y  + trainTrack3.size.height )
+        wagon5.position = CGPoint(x:self.frame.minX + wagon1.size.width , y:trainTrack5.position.y  + trainTrack3.size.height )
         wagon5.name = "wagon5"
 
         self.addChild(wagon5)
@@ -242,13 +251,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //code to move the train
         moveRightTrain(irTrain: wagon1, itrack:trainTrack1 )
         moveLeftTrain(ilTrain: wagon2, itrack: trainTrack2)
-        moveRightTrain(irTrain: wagon3, itrack:trainTrack3 )
+       /* moveRightTrain(irTrain: wagon3, itrack:trainTrack3 )
         moveLeftTrain(ilTrain: wagon4, itrack: trainTrack4)
-        moveRightTrain(irTrain: wagon5, itrack:trainTrack5 )
+        moveRightTrain(irTrain: wagon5, itrack:trainTrack5 )*/
 
       //  moveRightTrain(irTrain: wagon3, itrack:trainTrack3 )
        //moveRightTrain(irTrain: rightTrain1, itrack:trainTrack1 )
-       /* moveLeftTrain(ilTrain: leftTrain1,itrack:trainTrack2)
+       /*moveLeftTrain(ilTrain: leftTrain1,itrack:trainTrack2)
         moveRightTrain(irTrain: rightTrain2 , itrack:trainTrack3)
         moveLeftTrain(ilTrain: leftTrain2,itrack:trainTrack4)
         moveRightTrain(irTrain: rightTrain3, itrack:trainTrack5)*/
@@ -275,13 +284,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if firstBody.categoryBitMask == category_kitty && secondBody.categoryBitMask == category_wagon {
            // kitty.physicsBody?.pinned = true
             print("Kitty hit wagon. First contact has been made.")
-            let  hitWagonPhysics = secondBody.node!.physicsBody!
-            let  hitWagon = secondBody.node!
+   
+        }
+        if firstBody.categoryBitMask == category_kitty && secondBody.categoryBitMask == category_border {
+            // kitty.physicsBody?.pinned = true
+            print("Kitty hit border. First contact has been made.")
+            kitty.removeFromParent()
             
-           /* kitty.position = hitWagon.position
-            joint1 = SKPhysicsJointPin.joint(withBodyA: hitWagonPhysics , bodyB: kitty.physicsBody!, anchor: CGPoint(x: hitWagon.frame.midX, y: hitWagon.frame.midY))
-            
-            self.physicsWorld.add(joint1)*/
         }
         
         
@@ -325,17 +334,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let yPostionC :CGFloat = itrack.position.y  + itrack.size.height + irTrain.size.height/2
         let path = CGMutablePath()
         
-        path.move(to: CGPoint(x: -375 - irTrain.size.width/2 , y: yPostionC))
+        path.move(to: CGPoint(x: self.frame.minX + irTrain.size.width , y: yPostionC))
         path.addLine(to: CGPoint(x: self.frame.size.width , y: yPostionC))
         let followLine = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 10.0)
         irTrain.run(followLine )
         
         irTrain.run(
             SKAction.repeatForever(
-                SKAction.sequence([followLine,
-                                   SKAction.wait(forDuration: 3),
-                                   followLine,
-                                   SKAction.wait(forDuration: 3)
+                SKAction.sequence([
+                                   followLine
+                                  // SKAction.wait(forDuration: drand48()),
+                                  // followLine,
+                                  // SKAction.wait(forDuration: drand48())
                     ])
             )
             
@@ -355,10 +365,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         ilTrain.run(
             SKAction.repeatForever(
-                SKAction.sequence([followLine,
-                                   SKAction.wait(forDuration: 3),
-                                   followLine,
-                                   SKAction.wait(forDuration: 3)])
+                SKAction.sequence([
+                                   followLine
+                                  // SKAction.wait(forDuration: drand48()),
+                                  // followLine,
+                                  // SKAction.wait(forDuration: drand48())
+                    ])
             )
             
         )

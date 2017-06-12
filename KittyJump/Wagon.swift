@@ -42,7 +42,7 @@ class Wagon : SKSpriteNode{
 
          physicsBody!.categoryBitMask = category_wagon
          physicsBody!.contactTestBitMask =  category_kitty
-         physicsBody!.collisionBitMask = category_kitty | category_track
+         physicsBody!.collisionBitMask = category_kitty | category_track 
          
          physicsBody!.usesPreciseCollisionDetection = false
          physicsBody!.isDynamic = true
