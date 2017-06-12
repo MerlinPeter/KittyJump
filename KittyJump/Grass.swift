@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Grass : CommonSpriteNode{
+class Grass : SKSpriteNode {
     
     // MARK: -Init
     init() {

@@ -8,13 +8,12 @@
 
 import SpriteKit
 
-class CommonSpriteNode : SKSpriteNode{
-    
-    // MARK: - Contact Variables
-    let   category_track:UInt32  = 0x1 << 3;
-    let   category_train:UInt32  = 0x1 << 2;
-    let   category_trees:UInt32  = 0x1 << 0;
-    let   category_kitty:UInt32  = 0x1 << 4;
-    
- }
+
+let   category_track:UInt32  = 0x1 << 3;
+let   category_train:UInt32  = 0x1 << 2;
+let   category_trees:UInt32  = 0x1 << 0;
+let   category_kitty:UInt32  = 0x1 << 4;
+let   category_wagon:UInt32  = 0x1 << 5;
+
+
 

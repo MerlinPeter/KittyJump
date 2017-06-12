@@ -8,12 +8,14 @@
 
 import SpriteKit
 
-class RightTrain : CommonSpriteNode{
+class RightTrain : SKSpriteNode{
     
     // MARK: -Init
     init() {
         let texture = SKTexture(imageNamed: "trainrightfacing.png")
         super.init(texture: texture, color: UIColor.clear, size: CGSize(width: 600, height: 90))
+        //physicsBody=SKPhysicsBody(texture : texture , size: CGSize(width: self.size.width, height: self.size.height))
+
         setup()
         
     }
@@ -27,14 +29,13 @@ class RightTrain : CommonSpriteNode{
     // MARK: - custom function
     // Grass setup
     func setup(){
-        
-        //name="Grass"
+              //name="Grass"
         anchorPoint.x = 0.5
+        alpha = 1
         anchorPoint.y = 0.5
         zPosition = 1
-        
-        let texture = SKTexture(imageNamed: "trainrightfacing.png")
-        physicsBody=SKPhysicsBody(texture : texture , size: CGSize(width: 600, height: 90))
+    
+        /*physicsBody=SKPhysicsBody(rectangleOf :CGSize(width: 600, height: 90) )
 
         physicsBody!.allowsRotation = false
         physicsBody!.linearDamping = 0.5
@@ -43,7 +44,7 @@ class RightTrain : CommonSpriteNode{
         physicsBody!.collisionBitMask = category_kitty | category_track
 
         physicsBody!.usesPreciseCollisionDetection = true
-        physicsBody!.isDynamic = false
+        physicsBody!.isDynamic = true*/
 
 
     }

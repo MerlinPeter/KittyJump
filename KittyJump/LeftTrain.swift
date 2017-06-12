@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class LeftTrain : CommonSpriteNode{
+class LeftTrain : SKSpriteNode{
     
     // MARK: -Init
     init() {
@@ -33,15 +33,16 @@ class LeftTrain : CommonSpriteNode{
         anchorPoint.y = 0.5
         zPosition = 1
         
-        let texture = SKTexture(imageNamed: "trainleftfacing.png")
-        physicsBody=SKPhysicsBody(texture : texture , size: CGSize(width: 600, height: 90))
-        
+        /*let texture = SKTexture(imageNamed: "trainleftfacing.png")
+        //physicsBody=SKPhysicsBody(texture : texture , size: CGSize(width: 600, height: 90))
+        physicsBody=SKPhysicsBody(rectangleOf :self.size)
+
         physicsBody!.allowsRotation = false
         physicsBody!.linearDamping = 0.5
-        physicsBody!.categoryBitMask = category_train
-        physicsBody!.contactTestBitMask = category_kitty
+        physicsBody!.contactTestBitMask = category_kitty | category_track
+        physicsBody!.collisionBitMask = category_kitty | category_track
         physicsBody!.usesPreciseCollisionDetection = true
-        physicsBody!.isDynamic = false
+        physicsBody!.isDynamic = false*/
 
     }
     

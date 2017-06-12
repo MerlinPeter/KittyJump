@@ -27,6 +27,8 @@
 		D7C5EAEC1EEC09E1007DA71A /* trainleftfacing.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAEB1EEC09E1007DA71A /* trainleftfacing.png */; };
 		D7C5EAEE1EEC0AC0007DA71A /* Kitty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EAED1EEC0AC0007DA71A /* Kitty.swift */; };
 		D7C5EAF01EEC0AE1007DA71A /* kitty.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAEF1EEC0AE1007DA71A /* kitty.png */; };
+		D7C5EAF21EEE6B76007DA71A /* Wagon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EAF11EEE6B76007DA71A /* Wagon.swift */; };
+		D7C5EAF41EEE6F12007DA71A /* wagon.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAF31EEE6F12007DA71A /* wagon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		D7C5EAEB1EEC09E1007DA71A /* trainleftfacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trainleftfacing.png; sourceTree = "<group>"; };
 		D7C5EAED1EEC0AC0007DA71A /* Kitty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kitty.swift; sourceTree = "<group>"; };
 		D7C5EAEF1EEC0AE1007DA71A /* kitty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitty.png; sourceTree = "<group>"; };
+		D7C5EAF11EEE6B76007DA71A /* Wagon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wagon.swift; sourceTree = "<group>"; };
+		D7C5EAF31EEE6F12007DA71A /* wagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wagon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,7 @@
 				D7C5EADE1EEB9C67007DA71A /* railroad.png */,
 				D7C5EAE01EEBF6E9007DA71A /* grass.png */,
 				D7C5EAE71EEC0881007DA71A /* trainrightfacing.png */,
+				D7C5EAF31EEE6F12007DA71A /* wagon.png */,
 				D7C5EAEB1EEC09E1007DA71A /* trainleftfacing.png */,
 				D7C5EAEF1EEC0AE1007DA71A /* kitty.png */,
 			);
@@ -149,6 +154,7 @@
 				D7C5EAD91EEB638E007DA71A /* TrainTrack.swift */,
 				D7C5EAE51EEC07E5007DA71A /* LeftTrain.swift */,
 				D7C5EAE91EEC0993007DA71A /* RightTrain.swift */,
+				D7C5EAF11EEE6B76007DA71A /* Wagon.swift */,
 				D7C5EAED1EEC0AC0007DA71A /* Kitty.swift */,
 			);
 			name = Sprites;
@@ -239,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7C5EAF41EEE6F12007DA71A /* wagon.png in Resources */,
 				D7C5EAE11EEBF6E9007DA71A /* grass.png in Resources */,
 				D7C5EAEC1EEC09E1007DA71A /* trainleftfacing.png in Resources */,
 				D7C5EABF1EEB5C21007DA71A /* Main.storyboard in Resources */,
@@ -272,6 +279,7 @@
 				D7C5EAE61EEC07E5007DA71A /* LeftTrain.swift in Sources */,
 				D7C5EABC1EEB5C21007DA71A /* GameViewController.swift in Sources */,
 				D7C5EADA1EEB638E007DA71A /* TrainTrack.swift in Sources */,
+				D7C5EAF21EEE6B76007DA71A /* Wagon.swift in Sources */,
 				D7C5EAB41EEB5C21007DA71A /* AppDelegate.swift in Sources */,
 				D7C5EAEE1EEC0AC0007DA71A /* Kitty.swift in Sources */,
 				D7C5EAEA1EEC0993007DA71A /* RightTrain.swift in Sources */,

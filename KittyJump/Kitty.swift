@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Kitty : CommonSpriteNode{
+class Kitty : SKSpriteNode{
     
     // MARK: -Init
     init() {
@@ -26,22 +26,28 @@ class Kitty : CommonSpriteNode{
     
     
     // MARK: - custom function
-    // Grass setup
     func setup(){
         
-        //name="Grass"
+        name="Kitty"
         anchorPoint.x = 0.5
-        anchorPoint.y = 0.5
-        zPosition=1
+        anchorPoint.y = -0.1
         
-        physicsBody=SKPhysicsBody(rectangleOf: self.size)
+       // anchorPoint.x = 0.5
+        //anchorPoint.y = 0.5
+        zPosition=2
+       let centerPoint = CGPoint(x: self.size.width / 2 - (self.size.width * self.anchorPoint.x),y: self.size.height / 2 - (self.size.height * self.anchorPoint.y))
+        
+        physicsBody=SKPhysicsBody(circleOfRadius: self.size.width/2, center :centerPoint)
 
         physicsBody!.allowsRotation = false
-        physicsBody!.linearDamping = 0.5
+        physicsBody!.linearDamping = 0
+        physicsBody!.restitution = 0
+        physicsBody!.pinned = false
+
         physicsBody!.categoryBitMask = category_kitty
-        physicsBody!.contactTestBitMask = category_train
-        physicsBody!.collisionBitMask = category_train 
-        physicsBody!.usesPreciseCollisionDetection = true
+        physicsBody!.contactTestBitMask = category_wagon
+        physicsBody!.collisionBitMask = category_wagon
+        physicsBody!.usesPreciseCollisionDetection = false
  
         physicsBody!.isDynamic = true
 
