@@ -14,7 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: postion variable
     let trainXpostion:CGFloat    = -375.0
     let trainYpostion:CGFloat    = -600.0
-    let trainDiffpostion:CGFloat = 150.0
+    let trainDiffpostion:CGFloat = 185.0
     var gamePaused = false
 
 
@@ -38,12 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let rightTrain2 = RightTrain()
     let rightTrain3 = RightTrain()
     
-    let wagon1  = Wagon()
-    let wagon2  = Wagon()
-    let wagon3  = Wagon()
-    let wagon4  = Wagon()
-    let wagon5  = Wagon()
-    
+   
     var scoreLabel: SKLabelNode!
     var highScoreLabel: SKLabelNode!
     var scoreLabelHelper: SKLabelNode!
@@ -87,9 +82,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rightTrainSetup()
         scoreSetup()
         
-        kitty.position = wagon1.position
+        kitty.position.x  = rightTrain1.frame.minX + kitty.size.width / 2
+        kitty.position.y  = rightTrain1.frame.maxY
+
         self.addChild(kitty)
-        joint1 = SKPhysicsJointPin.joint(withBodyA: wagon1.physicsBody! , bodyB: kitty.physicsBody!, anchor: CGPoint(x: self.wagon1.frame.midX, y: self.wagon1.frame.midY))
+        joint1 = SKPhysicsJointPin.joint(withBodyA: rightTrain1.physicsBody! , bodyB: kitty.physicsBody!, anchor: CGPoint(x: self.rightTrain1.frame.minX, y: self.rightTrain1.frame.midY))
         
        
        self.physicsWorld.add(joint1)
@@ -106,47 +103,58 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     /* Called when a touch begins */
     
-    func switchJoint(iWagon :Wagon )  {
+    func switchJoint(iWagon :RightTrain )  {
         self.physicsWorld.remove(joint1)
         if let wagonPhysicBody = iWagon.physicsBody , let kittyPhysicBody = kitty.physicsBody {
-            kitty.position = iWagon.position
+            
+            kitty.position.x  = iWagon.frame.minX + kitty.size.width / 2
+            kitty.position.y  = iWagon.frame.maxY
 
-            joint1 = SKPhysicsJointPin.joint(withBodyA: wagonPhysicBody , bodyB: kittyPhysicBody, anchor: CGPoint(x: iWagon.frame.midX, y: iWagon.frame.midY))
+            joint1 = SKPhysicsJointPin.joint(withBodyA: wagonPhysicBody , bodyB: kittyPhysicBody, anchor: CGPoint(x: iWagon.frame.minX, y: iWagon.frame.midY))
             self.physicsWorld.add(joint1)
             score = score + 1
         }
 
         
     }
+    
+    func switchJointL(iWagon :LeftTrain )  {
+        self.physicsWorld.remove(joint1)
+        if let wagonPhysicBody = iWagon.physicsBody , let kittyPhysicBody = kitty.physicsBody {
+            
+            kitty.position.x  = iWagon.frame.maxX - kitty.size.width / 2
+            kitty.position.y  = iWagon.frame.maxY
+            
+            joint1 = SKPhysicsJointPin.joint(withBodyA: wagonPhysicBody , bodyB: kittyPhysicBody, anchor: CGPoint(x: iWagon.frame.midX, y: iWagon.frame.midY))
+            self.physicsWorld.add(joint1)
+            score = score + 1
+        }
+        
+        
+    }
+
 
     override func  touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch: UITouch in touches {
             
             let location = touch.location(in: self)
             let node = self.atPoint(location)
-            let  wagonName = node.name!
+            if let wagonName = node.name {
             switch wagonName {
-            case "wagon1":
-                switchJoint(iWagon:wagon1)
-            case "wagon2":
-                switchJoint(iWagon:wagon2)
-                moveRightWagon(irWagon: wagon3, itrack:trainTrack3 )
-            case "wagon3":
-                switchJoint(iWagon:wagon3)
-                 moveLeftWagon(ilTrain: wagon4,itrack:trainTrack4)
-            case "wagon4":
-                switchJoint(iWagon:wagon4)
-                moveRightWagon(irWagon: wagon5, itrack:trainTrack5 )
-            case "wagon5":
-                switchJoint(iWagon:wagon5)
+            case "rightTrain1":
+                switchJoint(iWagon:rightTrain1)
+            case "leftTrain1":
+                switchJointL(iWagon:leftTrain1)
+             case "rightTrain2":
+                switchJoint(iWagon:rightTrain2)
+             case "leftTrain2":
+                switchJointL(iWagon:leftTrain2)
+             case "rightTrain3":
+                switchJoint(iWagon:rightTrain3)
             default:
                 break
                 
             }
-            if (node.name == "move") {
-                  
-                let moveAction: SKAction = SKAction.moveBy(x: 10, y: 0, duration: 1)
-                wagon1.run(moveAction)
             }
             
             /*else{
@@ -167,7 +175,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel = SKLabelNode(fontNamed: "Arial")
         scoreLabel.zPosition = 1
         scoreLabel.text = "0"
-        scoreLabel.position = CGPoint(x:0,y:self.frame.maxY - 250)
+        scoreLabel.position = CGPoint(x:0,y:self.frame.maxY - 200)
         scoreLabel.fontSize=250
         scoreLabel.fontColor=UIColor.white
         scoreLabel.horizontalAlignmentMode = .center
@@ -176,7 +184,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabelHelper = SKLabelNode(fontNamed: "Arial")
         scoreLabelHelper.zPosition = 1
         scoreLabelHelper.text = "Current Score"
-        scoreLabelHelper.position = CGPoint(x:0,y:self.frame.maxY - 400)
+        scoreLabelHelper.position = CGPoint(x:0,y:self.frame.maxY - 300)
         scoreLabelHelper.fontSize=30
         scoreLabelHelper.fontColor=UIColor.white
         scoreLabelHelper.horizontalAlignmentMode = .center
@@ -245,17 +253,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //second train from  down
         
-        wagon2.position = CGPoint(x: self.frame.maxX + wagon2.size.width , y:trainTrack2.position.y  + trainTrack2.size.height)
-        wagon2.name = "wagon2"
+        leftTrain1.position = CGPoint(x: self.frame.maxX + leftTrain1.size.width , y:trainTrack2.position.y  + trainTrack2.size.height)
+        leftTrain1.name = "leftTrain1"
         
-        self.addChild(wagon2)
+        self.addChild(leftTrain1)
         
         
         // fourth train from down
-        wagon4.position = CGPoint(x: self.frame.maxX + wagon4.size.width , y:trainTrack4.position.y  + trainTrack3.size.height )
-        wagon4.name = "wagon4"
+        leftTrain2.position = CGPoint(x: self.frame.maxX + leftTrain2.size.width , y:trainTrack4.position.y  + trainTrack3.size.height )
+        leftTrain2.name = "leftTrain2"
         
-        self.addChild(wagon4)
+        self.addChild(leftTrain2)
         
         
     }
@@ -263,63 +271,52 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func rightTrainSetup()  {
         
         let  htrainHeight = rightTrain1.size.height / 2
-        let  htrainWidth = rightTrain1.size.width / 2
+        let  htrainWidth = rightTrain1.size.width
         let  trackHeight = trainTrack1.size.height
         
         //last train
         
-        wagon1.position = CGPoint(x: self.frame.minX + wagon1.size.width , y:trainTrack1.position.y  + trackHeight )
-        wagon1.name = "wagon1"
-        self.addChild(wagon1)
+        rightTrain1.position = CGPoint(x: self.frame.minX + htrainWidth , y:trainTrack1.position.y  + trackHeight )
+        rightTrain1.name = "rightTrain1"
+        self.addChild(rightTrain1)
         
-        rightTrain1.position = CGPoint(x: wagon1.frame.maxX + htrainWidth  , y:trainTrack1.position.y  + trackHeight  + htrainHeight)
-         rightTrain1.name = "train1"
-         self.addChild(rightTrain1)
-        let train1joint = SKPhysicsJointPin.joint(withBodyA: wagon1.physicsBody! , bodyB: rightTrain1.physicsBody!, anchor: CGPoint(x: self.rightTrain1.frame.minX, y: self.rightTrain1.frame.minY))
-        
-        self.physicsWorld.add(train1joint)
         
         //third train
         
-        wagon3.position = CGPoint(x: self.frame.minX - wagon1.size.width , y:trainTrack3.position.y  + trackHeight )
-        wagon3.name = "wagon3"
-        self.addChild(wagon3)
+        rightTrain2.position = CGPoint(x: self.frame.minX - rightTrain2.size.width , y:trainTrack3.position.y  + trackHeight )
+        rightTrain2.name = "rightTrain2"
+        self.addChild(rightTrain2)
         
-        rightTrain3.position = CGPoint(x: wagon3.frame.maxX + htrainWidth  , y:trainTrack3.position.y  + trackHeight  + htrainHeight)
-        rightTrain3.name = "train3"
-        self.addChild(rightTrain3)
-        let train3joint = SKPhysicsJointPin.joint(withBodyA: wagon3.physicsBody! , bodyB: rightTrain3.physicsBody!, anchor: CGPoint(x: self.rightTrain3.frame.minX, y: self.rightTrain3.frame.minY))
-        
-        self.physicsWorld.add(train3joint)
         
         //5th from down
         
-        wagon5.position = CGPoint(x:self.frame.minX - wagon1.size.width , y:trainTrack5.position.y  + trainTrack3.size.height )
-        wagon5.name = "wagon5"
-        self.addChild(wagon5)
+        rightTrain3.position = CGPoint(x:self.frame.minX - rightTrain3.size.width , y:trainTrack5.position.y  + trainTrack3.size.height )
+        rightTrain3.name = "rightTrain3"
+        self.addChild(rightTrain3)
         
     }
     
-        func moveRightWagon(irWagon:Wagon, itrack:TrainTrack)  {
+    func moveRightWagon(irWagon:RightTrain, itrack:TrainTrack)  {
         
         let yPostionC :CGFloat = itrack.position.y  + itrack.size.height + irWagon.size.height/2
         let path = CGMutablePath()
         
-            if  irWagon.name == "wagon1"{
-                path.move(to: CGPoint(x: self.frame.minX + irWagon.size.width , y: yPostionC))
-
-            }else{
-                path.move(to: CGPoint(x: self.frame.minX - irWagon.size.width , y: yPostionC))
-
-            }
+        if  irWagon.name == "rightTrain1"{
+            path.move(to: CGPoint(x: self.frame.minX + irWagon.size.width, y: yPostionC))
+            
+        }else{
+            path.move(to: CGPoint(x: self.frame.minX - irWagon.size.width , y: yPostionC))
+            
+        }
         path.addLine(to: CGPoint(x: self.frame.size.width , y: yPostionC))
         let followLine = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 10.0)
-         
+        
+        //irWagon.run(followLine)
         irWagon.run(
             SKAction.repeatForever(
                 SKAction.sequence([
-                                   followLine
-
+                    followLine
+                    
                     ])
             )
             
@@ -327,15 +324,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func moveLeftWagon(ilTrain:Wagon, itrack:TrainTrack)  {
+    func moveLeftTrain(ilTrain:LeftTrain, itrack:TrainTrack)  {
         // TODO: merlin fix this function similar to right train move
         let yPostionC :CGFloat = itrack.position.y  + itrack.size.height + ilTrain.size.height/2
         let path = CGMutablePath()
         path.move(to: CGPoint(x: self.frame.maxX  + ilTrain.size.width , y: yPostionC))
         path.addLine(to: CGPoint(x: -self.frame.size.width , y: yPostionC))
-        let followLine = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 10.0)
+        let followLine = SKAction.follow(path, asOffset: false, orientToPath: false, duration: 15.0)
         // let reversedLine = followLine.reversed()
-        
+      //  ilTrain.run(followLine)
         ilTrain.run(
             SKAction.repeatForever(
                 SKAction.sequence([
@@ -415,9 +412,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         
         //code to move the train
-        moveRightWagon(irWagon: wagon1, itrack:trainTrack1 )
-         moveLeftWagon(ilTrain: wagon2, itrack: trainTrack2)
-        self.physicsWorld.contactDelegate = self
+        moveRightWagon(irWagon: rightTrain1, itrack:trainTrack1 )
+        moveLeftTrain(ilTrain: leftTrain1, itrack: trainTrack2)
+        moveRightWagon(irWagon: rightTrain2, itrack:trainTrack3)
+        moveLeftTrain(ilTrain: leftTrain2, itrack: trainTrack4)
+        moveRightWagon(irWagon: rightTrain3, itrack:trainTrack5 )
+ 
+         self.physicsWorld.contactDelegate = self
         
     }
     
@@ -434,7 +435,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func showLost() {
         
-        if score > highScore {
+        if score >  SharingManager.sharedInstance.highScore {
             SharingManager.sharedInstance.highScore = score
         }
         self.gamePaused = true
@@ -456,7 +457,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
 
-        
+    
 
 
 }

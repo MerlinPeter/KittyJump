@@ -30,7 +30,7 @@ class Kitty : SKSpriteNode{
         
         name="Kitty"
         anchorPoint.x = 0.5
-        anchorPoint.y = -0.1
+        anchorPoint.y = 0.5
         
        // anchorPoint.x = 0.5
         //anchorPoint.y = 0.5

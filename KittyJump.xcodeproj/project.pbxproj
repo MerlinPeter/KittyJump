@@ -27,7 +27,7 @@
 		D7C5EAEC1EEC09E1007DA71A /* trainleftfacing.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAEB1EEC09E1007DA71A /* trainleftfacing.png */; };
 		D7C5EAEE1EEC0AC0007DA71A /* Kitty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EAED1EEC0AC0007DA71A /* Kitty.swift */; };
 		D7C5EAF01EEC0AE1007DA71A /* kitty.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAEF1EEC0AE1007DA71A /* kitty.png */; };
-		D7C5EAF21EEE6B76007DA71A /* Wagon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EAF11EEE6B76007DA71A /* Wagon.swift */; };
+		D7C5EAF21EEE6B76007DA71A /* WagonDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EAF11EEE6B76007DA71A /* WagonDelete.swift */; };
 		D7C5EAF41EEE6F12007DA71A /* wagon.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAF31EEE6F12007DA71A /* wagon.png */; };
 		D7C5EAF61EEF3ACC007DA71A /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EAF51EEF3ACC007DA71A /* SessionManager.swift */; };
 		D7C5EAF81EEF435D007DA71A /* trainright.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAF71EEF435D007DA71A /* trainright.png */; };
@@ -68,7 +68,7 @@
 		D7C5EAEB1EEC09E1007DA71A /* trainleftfacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trainleftfacing.png; sourceTree = "<group>"; };
 		D7C5EAED1EEC0AC0007DA71A /* Kitty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kitty.swift; sourceTree = "<group>"; };
 		D7C5EAEF1EEC0AE1007DA71A /* kitty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitty.png; sourceTree = "<group>"; };
-		D7C5EAF11EEE6B76007DA71A /* Wagon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wagon.swift; sourceTree = "<group>"; };
+		D7C5EAF11EEE6B76007DA71A /* WagonDelete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WagonDelete.swift; sourceTree = "<group>"; };
 		D7C5EAF31EEE6F12007DA71A /* wagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wagon.png; sourceTree = "<group>"; };
 		D7C5EAF51EEF3ACC007DA71A /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		D7C5EAF71EEF435D007DA71A /* trainright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trainright.png; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 				D7C5EAD91EEB638E007DA71A /* TrainTrack.swift */,
 				D7C5EAE51EEC07E5007DA71A /* LeftTrain.swift */,
 				D7C5EAE91EEC0993007DA71A /* RightTrain.swift */,
-				D7C5EAF11EEE6B76007DA71A /* Wagon.swift */,
+				D7C5EAF11EEE6B76007DA71A /* WagonDelete.swift */,
 				D7C5EAED1EEC0AC0007DA71A /* Kitty.swift */,
 			);
 			name = Sprites;
@@ -286,7 +286,7 @@
 				D7C5EAE61EEC07E5007DA71A /* LeftTrain.swift in Sources */,
 				D7C5EABC1EEB5C21007DA71A /* GameViewController.swift in Sources */,
 				D7C5EADA1EEB638E007DA71A /* TrainTrack.swift in Sources */,
-				D7C5EAF21EEE6B76007DA71A /* Wagon.swift in Sources */,
+				D7C5EAF21EEE6B76007DA71A /* WagonDelete.swift in Sources */,
 				D7C5EAB41EEB5C21007DA71A /* AppDelegate.swift in Sources */,
 				D7C5EAEE1EEC0AC0007DA71A /* Kitty.swift in Sources */,
 				D7C5EAEA1EEC0993007DA71A /* RightTrain.swift in Sources */,
