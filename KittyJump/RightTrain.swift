@@ -12,8 +12,8 @@ class RightTrain : SKSpriteNode{
     
     // MARK: -Init
     init() {
-        let texture = SKTexture(imageNamed: "trainrightfacing.png")
-        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: 600, height: 90))
+        let texture = SKTexture(imageNamed: "trainright.png")
+        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: 500, height: 90))
         //physicsBody=SKPhysicsBody(texture : texture , size: CGSize(width: self.size.width, height: self.size.height))
 
         setup()
@@ -32,19 +32,24 @@ class RightTrain : SKSpriteNode{
               //name="Grass"
         anchorPoint.x = 0.5
         alpha = 1
-        anchorPoint.y = 0.5
+        anchorPoint.y = 0.75
         zPosition = 1
-    
-        /*physicsBody=SKPhysicsBody(rectangleOf :CGSize(width: 600, height: 90) )
+          let centerPoint = CGPoint(x: self.size.width / 2 - (self.size.width * self.anchorPoint.x),y: self.size.height / 2 - (self.size.height * self.anchorPoint.y))
+        physicsBody=SKPhysicsBody(rectangleOf :CGSize(width: 500, height: 90), center :centerPoint)
 
         physicsBody!.allowsRotation = false
-        physicsBody!.linearDamping = 0.5
+        physicsBody!.linearDamping = 0
+        physicsBody!.restitution = 0
         physicsBody!.categoryBitMask = category_train
-        physicsBody!.contactTestBitMask = category_kitty | category_track
+        physicsBody!.pinned = false
+        physicsBody!.contactTestBitMask = category_kitty
+        
         physicsBody!.collisionBitMask = category_kitty | category_track
 
         physicsBody!.usesPreciseCollisionDetection = true
-        physicsBody!.isDynamic = true*/
+        physicsBody!.isDynamic = true
+        physicsBody!.affectedByGravity = true
+        
 
 
     }

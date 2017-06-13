@@ -38,11 +38,11 @@ class Wagon : SKSpriteNode{
          physicsBody!.allowsRotation = false
          physicsBody!.linearDamping = 0
          physicsBody!.restitution = 0
-         physicsBody!.affectedByGravity = false
+         physicsBody!.affectedByGravity = true
 
          physicsBody!.categoryBitMask = category_wagon
-         physicsBody!.contactTestBitMask =  category_kitty
-         physicsBody!.collisionBitMask = category_kitty | category_track 
+         physicsBody!.contactTestBitMask =  category_kitty  
+         physicsBody!.collisionBitMask = category_kitty | category_track | category_train
          
          physicsBody!.usesPreciseCollisionDetection = false
          physicsBody!.isDynamic = true

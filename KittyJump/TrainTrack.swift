@@ -37,10 +37,11 @@ class TrainTrack : SKSpriteNode{
             physicsBody=SKPhysicsBody(rectangleOf:CGSize(width: 750*3, height: 20), center :centerPoint)
             
             physicsBody!.allowsRotation = false
-             physicsBody!.linearDamping = 0.5
+            physicsBody!.linearDamping = 0
+            physicsBody!.restitution = 0
             physicsBody!.categoryBitMask = category_track
-            physicsBody!.contactTestBitMask = category_train
-            physicsBody!.collisionBitMask = category_train
+           // physicsBody!.contactTestBitMask = category_train | category_wagon
+            physicsBody!.collisionBitMask = category_train | category_wagon
             physicsBody!.usesPreciseCollisionDetection = true
             physicsBody!.isDynamic = false
         }
