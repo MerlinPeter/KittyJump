@@ -44,6 +44,7 @@ class TrainTrack : SKSpriteNode{
             physicsBody!.collisionBitMask = category_train | category_wagon
             physicsBody!.usesPreciseCollisionDetection = true
             physicsBody!.isDynamic = false
+            physicsBody!.affectedByGravity = false
         }
     
     static func getHeight() -> CGFloat{

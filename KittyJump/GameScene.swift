@@ -17,14 +17,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let trainYpostion:CGFloat    = -600.0
     let trainDiffpostion:CGFloat = 185.0
     var gamePaused = false
-
+    
 
     // MARK: screen sprite variable
-    /*let trainTrack1 = TrainTrack()
-    let trainTrack2 = TrainTrack()
-    let trainTrack3 = TrainTrack()
-    let trainTrack4 = TrainTrack()
-    let trainTrack5 = TrainTrack()*/
+    
+    var cam:SKCameraNode!
+
     var trainTrackArray = [TrainTrack] ()
     
 
@@ -51,7 +49,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             Label.highScoreLabel.text = "High Score : \(SharingManager.sharedInstance.highScore)"
         }
     }
-    
+    // MARK: Init functions
+
     override init(size: CGSize ) {
         super.init(size: size)
         
@@ -60,13 +59,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
-        
-        let borderBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.1)
+
+        let borderBody = SKPhysicsBody(edgeLoopFrom:
+            CGRect(
+                    x:self.frame.minX,
+                    y:self.frame.minY,
+                width:self.frame.width,
+                height:self.frame.height * 10))
         borderBody.friction = 0
         self.physicsBody = borderBody
         self.physicsBody?.categoryBitMask = category_border
-
-        
+   
         trackSetup()
         grassSetup()
 
@@ -78,10 +82,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         kitty.position.y  = rightTrain1.frame.maxY
 
         self.addChild(kitty)
-        joint1 = SKPhysicsJointPin.joint(withBodyA: rightTrain1.physicsBody! , bodyB: kitty.physicsBody!, anchor: CGPoint(x: self.rightTrain1.frame.minX, y: self.rightTrain1.frame.midY))
         
-       
-       self.physicsWorld.add(joint1)
+        joint1 = SKPhysicsJointPin.joint(withBodyA: rightTrain1.physicsBody! , bodyB: kitty.physicsBody!, anchor: CGPoint(x: self.rightTrain1.frame.minX, y: self.rightTrain1.frame.midY))
+     //  self.physicsWorld.add(joint1)
+
+
         
     }
     // MARK:    functions to make actors move
@@ -135,13 +140,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
 
+    // MARK:- Touches
+
 
     override func  touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+
         for touch: UITouch in touches {
             
             let location = touch.location(in: self)
             let node = self.atPoint(location)
-            if let wagonName = node.name {
+ 
+ 
+             if let wagonName = node.name {
                 switch wagonName {
                 case "rightTrain1":
                     locationDetectR(train: rightTrain1, location: location)
@@ -155,8 +166,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     locationDetectR(train: rightTrain3, location: location)
                     
                 default:
-                    //self.physicsWorld.removeAllJoints()
-                   // kitty.position = location
+                    self.physicsWorld.removeAllJoints()
+                 //   kitty.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 20.0))
+
                     break
                     
                 }
@@ -214,7 +226,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func trackSetup()  {
   
-        for i in 0...4 {
+        for i in 0...10 {
             
             let trainTrack = TrainTrack()
             trainTrack.position = getTrainTrackPosition(row : i)
@@ -225,8 +237,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func getTrainTrackPosition( row:Int) -> CGPoint
-    {
+    func getTrainTrackPosition( row:Int) -> CGPoint{
+
         let x = self.frame.minX
         let y = trainYpostion  + trainDiffpostion * CGFloat(row)
         return CGPoint(x: x, y: y)
@@ -234,7 +246,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func grassSetup()  {
         
-        for i in 0...4 {
+        for i in 0...10 {
             let grass = Grass()
             grass.position = getGrassPosition(row : i)
             self.addChild(grass)
@@ -242,8 +254,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func getGrassPosition( row:Int) -> CGPoint
-    {
+    func getGrassPosition( row:Int) -> CGPoint{
+        
         let x = self.frame.minX
         let y = trainYpostion  + trainDiffpostion * CGFloat(row)  + TrainTrack.getHeight()
         return CGPoint(x: x, y: y)
@@ -403,6 +415,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         
 
+        cam = SKCameraNode()
+        cam.position =  CGPoint(x: self.frame.midX, y : self.frame.midY )
+        self.addChild(cam)
+        self.camera = cam
+        let horizConstraint = SKConstraint.distance(SKRange(upperLimit: 50), to: kitty)
+        let vertConstraint = SKConstraint.distance(SKRange(upperLimit: 0), to: kitty)
+        let leftConstraint = SKConstraint.positionX(SKRange(lowerLimit: 0))
+        let bottomConstraint = SKConstraint.positionY(SKRange(lowerLimit: 0))
+        let rightConstraint = SKConstraint.positionX(SKRange(upperLimit:0))
+        let topConstraint = SKConstraint.positionY(SKRange(upperLimit: (self.frame.maxY*10)))//tBD
+        
+        
+         cam.constraints = [horizConstraint, vertConstraint, leftConstraint , bottomConstraint, rightConstraint,topConstraint]
         
         //code to move the train
         moveRightWagon(irWagon: rightTrain1, itrack:trainTrackArray[0] )

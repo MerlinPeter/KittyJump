@@ -63,7 +63,8 @@ class RightTrain : SKSpriteNode{
         
         physicsBody!.usesPreciseCollisionDetection = false
         physicsBody!.isDynamic = true
-        
+        physicsBody!.affectedByGravity = false
+
         
     }
     
