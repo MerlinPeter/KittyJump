@@ -40,16 +40,12 @@ class RightTrain : SKSpriteNode{
         let bCenterPoint = CGPoint(x: self.frame.maxX - (490 / 2) , y:0)
         
         let leftSmallBox = SKPhysicsBody(rectangleOf :CGSize(width: 100, height: 45) , center:sCenterPoint )
-        leftSmallBox.categoryBitMask = category_wagon
-        leftSmallBox.collisionBitMask = category_kitty | category_track | category_train
-        leftSmallBox.contactTestBitMask = category_kitty | category_track | category_train
+ 
         
         
         let rightBigBox = SKPhysicsBody(rectangleOf :CGSize(width: 490, height: 90) , center:bCenterPoint )
         
-        rightBigBox.contactTestBitMask = category_kitty | category_track | category_train
-        rightBigBox.categoryBitMask = category_train
-        rightBigBox.collisionBitMask = category_kitty | category_track | category_train
+
         
         physicsBody=SKPhysicsBody(bodies: [leftSmallBox,rightBigBox])
         
@@ -61,9 +57,9 @@ class RightTrain : SKSpriteNode{
         // physicsBody!.mass = 10
         //  physicsBody!.density = 10
         
-        // physicsBody!.categoryBitMask = category_wagon
-        //physicsBody!.contactTestBitMask =  category_kitty
-        physicsBody!.collisionBitMask = category_track
+        physicsBody!.categoryBitMask = category_wagon
+        physicsBody!.contactTestBitMask =  category_kitty
+        physicsBody!.collisionBitMask = category_track | category_kitty
         
         physicsBody!.usesPreciseCollisionDetection = false
         physicsBody!.isDynamic = true
