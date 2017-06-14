@@ -16,7 +16,7 @@ class TrainTrack : SKSpriteNode{
             super.init(texture: texture, color: UIColor.clear, size: CGSize(width: 750, height: 20))
             setup()
             
-    }
+         }
     
     
         required init?(coder aDecoder: NSCoder) {
@@ -45,6 +45,12 @@ class TrainTrack : SKSpriteNode{
             physicsBody!.usesPreciseCollisionDetection = true
             physicsBody!.isDynamic = false
         }
+    
+    static func getHeight() -> CGFloat{
+    
+            return 20
+        
+    }
     
     }
     

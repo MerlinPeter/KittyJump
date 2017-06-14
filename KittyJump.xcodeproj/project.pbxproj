@@ -31,6 +31,7 @@
 		D7C5EAF41EEE6F12007DA71A /* wagon.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAF31EEE6F12007DA71A /* wagon.png */; };
 		D7C5EAF61EEF3ACC007DA71A /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EAF51EEF3ACC007DA71A /* SessionManager.swift */; };
 		D7C5EAF81EEF435D007DA71A /* trainright.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C5EAF71EEF435D007DA71A /* trainright.png */; };
+		D7C5EAFA1EF0F638007DA71A /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C5EAF91EF0F638007DA71A /* Label.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		D7C5EAF31EEE6F12007DA71A /* wagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wagon.png; sourceTree = "<group>"; };
 		D7C5EAF51EEF3ACC007DA71A /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		D7C5EAF71EEF435D007DA71A /* trainright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trainright.png; sourceTree = "<group>"; };
+		D7C5EAF91EF0F638007DA71A /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				D7C5EAB51EEB5C21007DA71A /* GameScene.sks */,
 				D7C5EAB71EEB5C21007DA71A /* Actions.sks */,
 				D7C5EAB91EEB5C21007DA71A /* GameScene.swift */,
+				D7C5EAFB1EF0FA9E007DA71A /* SceneHelper */,
 				D7C5EABB1EEB5C21007DA71A /* GameViewController.swift */,
 				D7C5EABD1EEB5C21007DA71A /* Main.storyboard */,
 				D7C5EAC01EEB5C21007DA71A /* Assets.xcassets */,
@@ -164,6 +167,14 @@
 				D7C5EAED1EEC0AC0007DA71A /* Kitty.swift */,
 			);
 			name = Sprites;
+			sourceTree = "<group>";
+		};
+		D7C5EAFB1EF0FA9E007DA71A /* SceneHelper */ = {
+			isa = PBXGroup;
+			children = (
+				D7C5EAF91EF0F638007DA71A /* Label.swift */,
+			);
+			name = SceneHelper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +293,7 @@
 			files = (
 				D7C5EADC1EEB76D7007DA71A /* CommonSpriteNode.swift in Sources */,
 				D7C5EABA1EEB5C21007DA71A /* GameScene.swift in Sources */,
+				D7C5EAFA1EF0F638007DA71A /* Label.swift in Sources */,
 				D7C5EAE31EEBFB03007DA71A /* Grass.swift in Sources */,
 				D7C5EAE61EEC07E5007DA71A /* LeftTrain.swift in Sources */,
 				D7C5EABC1EEB5C21007DA71A /* GameViewController.swift in Sources */,

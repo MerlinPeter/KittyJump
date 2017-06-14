@@ -13,18 +13,19 @@ import Foundation
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: postion variable
-    let trainXpostion:CGFloat    = -375.0
+    //let trainXpostion:CGFloat    = -375.0
     let trainYpostion:CGFloat    = -600.0
     let trainDiffpostion:CGFloat = 185.0
     var gamePaused = false
 
 
     // MARK: screen sprite variable
-    let trainTrack1 = TrainTrack()
+    /*let trainTrack1 = TrainTrack()
     let trainTrack2 = TrainTrack()
     let trainTrack3 = TrainTrack()
     let trainTrack4 = TrainTrack()
-    let trainTrack5 = TrainTrack()
+    let trainTrack5 = TrainTrack()*/
+    var trainTrackArray = [TrainTrack] ()
     
 
     
@@ -34,26 +35,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let rightTrain1 = RightTrain()
     let rightTrain2 = RightTrain()
     let rightTrain3 = RightTrain()
-    
-   
-    var scoreLabel: SKLabelNode!
-    var highScoreLabel: SKLabelNode!
-    var scoreLabelHelper: SKLabelNode!
-
-    
+     
     let kitty = Kitty()
  
     var joint1 : SKPhysicsJointPin!
     
     var score: Int = 0 {
         didSet {
-            scoreLabel.text = "\(score)"
+            Label.scoreLabel.text = "\(score)"
         }
     }
     
     var highScore: Int = 0 {
         didSet {
-            highScoreLabel.text = "High Score : \(SharingManager.sharedInstance.highScore)"
+            Label.highScoreLabel.text = "High Score : \(SharingManager.sharedInstance.highScore)"
         }
     }
     
@@ -90,6 +85,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     // MARK:    functions to make actors move
+    
     //track position setup
 
     
@@ -187,6 +183,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     func locationDetectL(train:LeftTrain, location:CGPoint) {
+        
         if (location.x > (train.frame.maxX - 100)){
             
             switchJointL(iWagon:train)
@@ -196,76 +193,59 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-   
-     // MARK: Init  functions to build screen
+     // MARK:- Init  functions to build screen
     func scoreSetup()  {
-        scoreLabel = SKLabelNode(fontNamed: "Arial")
-        scoreLabel.zPosition = 1
-        scoreLabel.text = "0"
-        scoreLabel.position = CGPoint(x:0,y:self.frame.maxY - 200)
-        scoreLabel.fontSize=250
-        scoreLabel.fontColor=UIColor.white
-        scoreLabel.horizontalAlignmentMode = .center
-        scoreLabel.verticalAlignmentMode = .center
-        self.addChild(scoreLabel)
-        scoreLabelHelper = SKLabelNode(fontNamed: "Arial")
-        scoreLabelHelper.zPosition = 1
-        scoreLabelHelper.text = "Current Score"
-        scoreLabelHelper.position = CGPoint(x:0,y:self.frame.maxY - 325)
-        scoreLabelHelper.fontSize=30
-        scoreLabelHelper.fontColor=UIColor.white
-        scoreLabelHelper.horizontalAlignmentMode = .center
-        scoreLabelHelper.verticalAlignmentMode = .center
-        self.addChild(scoreLabelHelper)
         
-        highScoreLabel = SKLabelNode(fontNamed: "Arial")
-        highScoreLabel.zPosition = 1
-
-        highScoreLabel.text = "High Score : \(SharingManager.sharedInstance.highScore)"
-
-        highScoreLabel.position = CGPoint(x:self.frame.maxX - 125, y:self.frame.maxY - 50)
-        highScoreLabel.fontSize = 30
-        highScoreLabel.fontColor = UIColor.white
-
-        self.addChild(highScoreLabel)
+        Label.createScoreTitle()
+        Label.scoreLabel.position = CGPoint(x:0,y:self.frame.maxY - 200)
+        self.addChild(Label.scoreLabel)
+    
+        Label.createScoreHelper()
+        Label.scoreLabelHelper.position = CGPoint(x:0,y:self.frame.maxY - 325)
+        self.addChild(Label.scoreLabelHelper)
+        
+        Label.createHighScore()
+        Label.highScoreLabel.position = CGPoint(x:self.frame.maxX - 125, y:self.frame.maxY - 50)
+        self.addChild(Label.highScoreLabel)
+        
     }
-    //track position setup
+    
+    // MARK: TrainTrack & Grass
+    
     func trackSetup()  {
-    
-        trainTrack1.position = CGPoint(x: trainXpostion, y:trainYpostion)
-        self.addChild(trainTrack1)
+  
+        for i in 0...4 {
+            
+            let trainTrack = TrainTrack()
+            trainTrack.position = getTrainTrackPosition(row : i)
+            self.addChild(trainTrack)
+            trainTrackArray.append(trainTrack)
+            
+        }
         
-        trainTrack2.position = CGPoint(x: trainXpostion, y:trainYpostion + trainDiffpostion)
-        self.addChild(trainTrack2)
-        
-        trainTrack3.position = CGPoint(x: trainXpostion, y:trainYpostion + (trainDiffpostion * 2))
-        self.addChild(trainTrack3)
-        
-        trainTrack4.position = CGPoint(x: trainXpostion, y:trainYpostion + (trainDiffpostion*3))
-        self.addChild(trainTrack4)
-        
-        trainTrack5.position = CGPoint(x: trainXpostion, y:trainYpostion + (trainDiffpostion*4))
-        self.addChild(trainTrack5)
-        
- 
     }
     
-    
+    func getTrainTrackPosition( row:Int) -> CGPoint
+    {
+        let x = self.frame.minX
+        let y = trainYpostion  + trainDiffpostion * CGFloat(row)
+        return CGPoint(x: x, y: y)
+    }
     
     func grassSetup()  {
         
-        for c in 0...4 {
+        for i in 0...4 {
             let grass = Grass()
-            grass.position = getTilePosition( row: c)
+            grass.position = getGrassPosition(row : i)
             self.addChild(grass)
         }
         
     }
     
-    func getTilePosition( row:Int) -> CGPoint
+    func getGrassPosition( row:Int) -> CGPoint
     {
         let x = self.frame.minX
-        let y = trainYpostion  + trainDiffpostion * CGFloat(row)  + trainTrack1.size.height
+        let y = trainYpostion  + trainDiffpostion * CGFloat(row)  + TrainTrack.getHeight()
         return CGPoint(x: x, y: y)
     }
     
@@ -274,16 +254,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //second train from  down
         
-        leftTrain1.position = CGPoint(x: self.frame.maxX + leftTrain1.size.width/2 , y:trainTrack2.position.y  + trainTrack2.size.height)
+        leftTrain1.position = CGPoint(x: self.frame.maxX + leftTrain1.size.width/2 , y:trainTrackArray[1].position.y  + TrainTrack.getHeight())
         leftTrain1.name = "leftTrain1"
-        
         self.addChild(leftTrain1)
         
         
         // fourth train from down
-        leftTrain2.position = CGPoint(x: self.frame.maxX + leftTrain2.size.width/2 , y:trainTrack4.position.y  + trainTrack3.size.height )
+        leftTrain2.position = CGPoint(x: self.frame.maxX + leftTrain2.size.width/2 , y:trainTrackArray[3].position.y  + TrainTrack.getHeight() )
         leftTrain2.name = "leftTrain2"
-        
         self.addChild(leftTrain2)
         
         
@@ -292,25 +270,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func rightTrainSetup()  {
         
         let  htrainWidth = rightTrain1.size.width
-        let  trackHeight = trainTrack1.size.height
+        let  trackHeight = TrainTrack.getHeight()
         
         //last train
         
-        rightTrain1.position = CGPoint(x: self.frame.minX + (htrainWidth-200) , y:trainTrack1.position.y  + trackHeight )
+        rightTrain1.position = CGPoint(x: self.frame.minX + (htrainWidth-200) , y:trainTrackArray[0].position.y  + trackHeight )
         rightTrain1.name = "rightTrain1"
         self.addChild(rightTrain1)
         
         
         //third train
         
-        rightTrain2.position = CGPoint(x: self.frame.minX + rightTrain2.size.width - 300 , y:trainTrack3.position.y  + trackHeight )
+        rightTrain2.position = CGPoint(x: self.frame.minX + rightTrain2.size.width - 300 , y:trainTrackArray[2].position.y  + trackHeight )
         rightTrain2.name = "rightTrain2"
         self.addChild(rightTrain2)
         
         
         //5th from down
         
-        rightTrain3.position = CGPoint(x:self.frame.minX + rightTrain3.size.width - 300, y:trainTrack5.position.y  + trainTrack3.size.height )
+        rightTrain3.position = CGPoint(x:self.frame.minX + rightTrain3.size.width - 300, y:trainTrackArray[4].position.y  + trackHeight )
         rightTrain3.name = "rightTrain3"
         self.addChild(rightTrain3)
         
@@ -364,6 +342,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         )
     }
     
+    // MARK:- Contact Delegate  functions
+
     
     func didBegin(_ contact: SKPhysicsContact) {
         
@@ -425,11 +405,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         
         //code to move the train
-        moveRightWagon(irWagon: rightTrain1, itrack:trainTrack1 )
-        moveLeftTrain(ilTrain: leftTrain1, itrack: trainTrack2)
-        moveRightWagon(irWagon: rightTrain2, itrack:trainTrack3)
-        moveLeftTrain(ilTrain: leftTrain2, itrack: trainTrack4)
-        moveRightWagon(irWagon: rightTrain3, itrack:trainTrack5 )
+        moveRightWagon(irWagon: rightTrain1, itrack:trainTrackArray[0] )
+        moveLeftTrain(ilTrain: leftTrain1, itrack: trainTrackArray[1])
+        moveRightWagon(irWagon: rightTrain2, itrack:trainTrackArray[2])
+        moveLeftTrain(ilTrain: leftTrain2, itrack: trainTrackArray[3])
+        moveRightWagon(irWagon: rightTrain3, itrack:trainTrackArray[4] )
  
          self.physicsWorld.contactDelegate = self
         
