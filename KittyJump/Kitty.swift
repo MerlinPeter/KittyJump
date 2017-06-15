@@ -41,16 +41,16 @@ class Kitty : SKSpriteNode{
 
         physicsBody!.allowsRotation = false
         physicsBody!.linearDamping = 0
-        physicsBody!.restitution = 0
+        physicsBody!.restitution = 1
         physicsBody!.pinned = false
 
         physicsBody!.categoryBitMask = category_kitty
         physicsBody!.contactTestBitMask =   category_border | category_train | category_wagon
         physicsBody!.collisionBitMask =  category_border  | category_train | category_wagon
-        physicsBody!.usesPreciseCollisionDetection = true
+        physicsBody!.usesPreciseCollisionDetection = false
  
         physicsBody!.isDynamic = true
-
+ 
     }
     
 }
