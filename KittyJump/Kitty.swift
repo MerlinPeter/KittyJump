@@ -41,7 +41,7 @@ class Kitty : SKSpriteNode{
 
         physicsBody!.allowsRotation = false
         physicsBody!.linearDamping = 0
-        physicsBody!.restitution = 1
+        physicsBody!.restitution = 0
         physicsBody!.pinned = false
 
         physicsBody!.categoryBitMask = category_kitty
