@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KittyJump/GameScene.swift"
-            timestampString = "519239344.900495"
+            timestampString = "519258627.62469"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "380"
-            endingLineNumber = "380"
+            startingLineNumber = "369"
+            endingLineNumber = "369"
             landmarkName = "moveLeftTrain(ilTrain:itrack:)"
             landmarkType = "7">
          </BreakpointContent>

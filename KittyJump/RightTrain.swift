@@ -54,9 +54,6 @@ class RightTrain : SKSpriteNode{
         physicsBody!.linearDamping = 0
         physicsBody!.restitution = 0
         physicsBody!.affectedByGravity = true
-        // physicsBody!.mass = 10
-        //  physicsBody!.density = 10
-        
         physicsBody!.categoryBitMask = category_wagon
         physicsBody!.contactTestBitMask =  category_kitty
         physicsBody!.collisionBitMask = category_track | category_kitty

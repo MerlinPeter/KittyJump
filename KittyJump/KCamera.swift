@@ -24,6 +24,7 @@ class KCamera: SKCameraNode {
         let rightConstraint = SKConstraint.positionX(SKRange(upperLimit:0))
         let topConstraint = SKConstraint.positionY(SKRange(upperLimit: (frameMax*10)))//tBD self.frame.maxY
         
+        //
         constraints = [horizConstraint, vertConstraint, leftConstraint , bottomConstraint, rightConstraint,topConstraint]
     
     }
